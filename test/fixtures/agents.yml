@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  codename: shadow_fox
+  level: 4
+  active: true
+
+two:
+  codename: night_orchid
+  level: 7
+  active: false
