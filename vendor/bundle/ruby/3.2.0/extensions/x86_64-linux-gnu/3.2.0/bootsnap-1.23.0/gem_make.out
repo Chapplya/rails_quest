@@ -1,0 +1,23 @@
+current directory: /home/den12262/project_work/Ruby_stud/test/rails_quest/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.23.0/ext/bootsnap
+/usr/bin/ruby3.2 -I/usr/lib/ruby/vendor_ruby extconf.rb
+checking for fdatasync() in unistd.h... yes
+checking for fstatat() in sys/stat.h... yes
+checking for whether -D_GNU_SOURCE is accepted as CPPFLAGS... yes
+checking for whether -O3 is accepted as CFLAGS... yes
+checking for whether -std=c99 is accepted as CFLAGS... yes
+creating Makefile
+
+current directory: /home/den12262/project_work/Ruby_stud/test/rails_quest/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.23.0/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20260420-27254-kzqzgs sitelibdir\=./.gem.20260420-27254-kzqzgs clean
+
+current directory: /home/den12262/project_work/Ruby_stud/test/rails_quest/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.23.0/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20260420-27254-kzqzgs sitelibdir\=./.gem.20260420-27254-kzqzgs
+compiling bootsnap.c
+linking shared-object bootsnap/bootsnap.so
+
+current directory: /home/den12262/project_work/Ruby_stud/test/rails_quest/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.23.0/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20260420-27254-kzqzgs sitelibdir\=./.gem.20260420-27254-kzqzgs install
+/usr/bin/install -c -m 0755 bootsnap.so ./.gem.20260420-27254-kzqzgs/bootsnap
+
+current directory: /home/den12262/project_work/Ruby_stud/test/rails_quest/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.23.0/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20260420-27254-kzqzgs sitelibdir\=./.gem.20260420-27254-kzqzgs clean
