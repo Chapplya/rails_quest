@@ -1,0 +1,79 @@
+<% task = quest_two_current_task %>
+<% current_step = quest_two_current_step %>
+<% total_steps = quest_two_tasks.size %>
+
+<section class="space-y-6">
+  <%- if current_step == 1 %>
+  <p>
+    Структура архива восстановлена, пора загрузить данные и научиться их читать. Твоя задача — наполнить базу тестовыми
+    данными и проверить, что система умеет строить сводки по агентам, миссиям и навыкам.
+  </p>
+
+  <p>
+    Для начала выполни команду:
+  </p>
+  <div class="rounded-xl border border-amber-700/60 bg-amber-950/20 p-4">
+    <div class="text-xs uppercase tracking-[0.3em] text-amber-400 mb-3">Команда для терминала</div>
+    <pre class="overflow-x-auto whitespace-pre-wrap text-sm text-amber-100">bundle exec rake db:seed</pre>
+  </div>
+    <p>
+    Когда она отработает, начинай выполнять задания. В каждом задании тебе нужно будет написать запрос к базе данных с помощью <code class="bg-gray-800 text-gray-300 px-2 py-1 rounded">ActiveRecord</code> и проверить, что результат совпадает с ожидаемым.
+    Запросы нужно писать в файле <code class="bg-gray-800 text-gray-300 px-2 py-1 rounded">app/services/quest2_student_service.rb</code>, там уже есть заготовки методов для каждого задания.
+    Обрати внимание на тестовую команду, приведенную в каждом задании — она показывает, какой именно метод будет вызван для проверки результата.
+    Ты можешь запускать эту команду в терминале, чтобы увидеть результат своего запроса и сравнить его с ожидаемым.
+    Ну или просто обнови страницу, результат загружается и здесь тоже.
+    Когда результат совпадёт с ожидаемым, ты сможешь перейти к следующему заданию.
+    Обрати внимание, что сервис возвращает строку!
+  </p>
+  <% end %>
+  <div class="rounded-xl border border-cyan-900/70 bg-cyan-950/20 p-4">
+    <div class="flex flex-wrap items-center justify-between gap-3">
+      <div>
+        <div class="text-xs uppercase tracking-[0.3em] text-cyan-500 mb-2">Шаг <%= current_step %> из <%= total_steps %></div>
+        <div class="text-lg font-semibold text-white"><%= task[:title][:ru] %></div>
+      </div>
+      <div class="rounded-full px-3 py-1 text-xs font-semibold <%= task[:solved] ? 'bg-green-500/20 text-green-300 border border-green-500/40' : 'bg-gray-800 text-gray-300 border border-gray-700' %>">
+        <%= task[:solved] ? 'СОВПАЛО' : 'ОЖИДАЕТСЯ' %>
+      </div>
+    </div>
+    <p class="mt-3 text-sm text-gray-300"><%= task[:description][:ru] %></p>
+  </div>
+
+  <div class="rounded-xl border border-amber-700/60 bg-amber-950/20 p-4">
+    <div class="text-xs uppercase tracking-[0.3em] text-amber-400 mb-3">Команда для терминала</div>
+    <pre class="overflow-x-auto whitespace-pre-wrap text-sm text-amber-100"><%= task[:command] %></pre>
+  </div>
+
+  <div class="grid gap-4 lg:grid-cols-2">
+    <div class="rounded-xl border border-green-700/60 bg-green-950/20 p-4">
+      <div class="text-xs uppercase tracking-[0.3em] text-green-400 mb-3">Правильный ответ</div>
+      <pre class="min-h-48 whitespace-pre-wrap text-sm leading-relaxed text-green-100"><%= task[:expected_output] %></pre>
+    </div>
+
+    <div class="rounded-xl border border-cyan-700/60 bg-cyan-950/20 p-4">
+      <div class="text-xs uppercase tracking-[0.3em] text-cyan-400 mb-3">Что вернул сервис</div>
+      <pre class="min-h-48 whitespace-pre-wrap text-sm leading-relaxed text-cyan-100"><%= task[:actual_output] %></pre>
+    </div>
+  </div>
+
+  <div class="flex flex-wrap items-center justify-between gap-3 border-t border-gray-800 pt-4">
+    <div class="flex gap-3">
+      <% if current_step > 1 %>
+        <%= link_to '← Предыдущий шаг', quest_two_step_path(current_step - 1), class: 'px-4 py-2 rounded bg-gray-800 hover:bg-gray-700 text-sm text-white transition' %>
+      <% end %>
+    </div>
+
+    <% if current_step < total_steps %>
+      <% if task[:solved] %>
+        <%= link_to 'Далее →', quest_two_step_path(current_step + 1), class: 'px-4 py-2 rounded bg-cyan-700 hover:bg-cyan-600 text-sm font-semibold text-white transition' %>
+      <% else %>
+        <span class="px-4 py-2 rounded bg-gray-800 text-sm font-semibold text-gray-500 cursor-not-allowed border border-gray-700">Далее →</span>
+      <% end %>
+    <% else %>
+      <span class="px-4 py-2 rounded bg-green-500/20 text-sm font-semibold text-green-300 border border-green-500/40">
+        Можно выполнить <code class="bg-gray-800 text-gray-300 px-1 py-0.5 rounded">rails quest:accept[2]</code> и открыть третье задание.
+        Но мы его еще не выложили, так что...
+      </span>
+    <% end %>
+  </div>
+</section>

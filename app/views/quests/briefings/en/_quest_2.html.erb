@@ -1,0 +1,83 @@
+<% task = quest_two_current_task %>
+<% current_step = quest_two_current_step %>
+<% total_steps = quest_two_tasks.size %>
+
+<section class="space-y-6">
+  <%- if current_step == 1 %>
+  <p>
+    The archive structure is back, and now it is time to load the data and learn how to read it. Your task is to seed the database
+    with test data and verify that the system can build reports for agents, missions, and skills.
+  </p>
+
+  <p>
+    First, run this command:
+  </p>
+
+  <div class="rounded-xl border border-amber-700/60 bg-amber-950/20 p-4">
+    <div class="text-xs uppercase tracking-[0.3em] text-amber-400 mb-3">Terminal command</div>
+    <pre class="overflow-x-auto whitespace-pre-wrap text-sm text-amber-100">bundle exec rake db:seed</pre>
+  </div>
+
+  <p>
+    Once it finishes, start working through the tasks. In each task you need to write an <code class="bg-gray-800 text-gray-300 px-2 py-1 rounded">ActiveRecord</code>
+    query and make sure its result matches the expected output.
+    Write your queries in <code class="bg-gray-800 text-gray-300 px-2 py-1 rounded">app/services/quest2_student_service.rb</code>; the method stubs for every task are already there.
+    Pay attention to the test command shown in each task — it tells you which method will be called for verification.
+    You can run that command in the terminal to inspect your result and compare it with the expected one.
+    Or simply refresh the page — the result is loaded here too.
+    Once the output matches, the next task will be unlocked.
+    And yes: the service must return a string.
+  </p>
+  <% end %>
+
+  <div class="rounded-xl border border-cyan-900/70 bg-cyan-950/20 p-4">
+    <div class="flex flex-wrap items-center justify-between gap-3">
+      <div>
+        <div class="text-xs uppercase tracking-[0.3em] text-cyan-500 mb-2">Step <%= current_step %> of <%= total_steps %></div>
+        <div class="text-lg font-semibold text-white"><%= task[:title][:en] %></div>
+      </div>
+      <div class="rounded-full px-3 py-1 text-xs font-semibold <%= task[:solved] ? 'bg-green-500/20 text-green-300 border border-green-500/40' : 'bg-gray-800 text-gray-300 border border-gray-700' %>">
+        <%= task[:solved] ? 'MATCHED' : 'WAITING' %>
+      </div>
+    </div>
+    <p class="mt-3 text-sm text-gray-300"><%= task[:description][:en] %></p>
+  </div>
+
+  <div class="rounded-xl border border-amber-700/60 bg-amber-950/20 p-4">
+    <div class="text-xs uppercase tracking-[0.3em] text-amber-400 mb-3">Terminal command</div>
+    <pre class="overflow-x-auto whitespace-pre-wrap text-sm text-amber-100"><%= task[:command] %></pre>
+  </div>
+
+  <div class="grid gap-4 lg:grid-cols-2">
+    <div class="rounded-xl border border-green-700/60 bg-green-950/20 p-4">
+      <div class="text-xs uppercase tracking-[0.3em] text-green-400 mb-3">Expected output</div>
+      <pre class="min-h-48 whitespace-pre-wrap text-sm leading-relaxed text-green-100"><%= task[:expected_output] %></pre>
+    </div>
+
+    <div class="rounded-xl border border-cyan-700/60 bg-cyan-950/20 p-4">
+      <div class="text-xs uppercase tracking-[0.3em] text-cyan-400 mb-3">Service output</div>
+      <pre class="min-h-48 whitespace-pre-wrap text-sm leading-relaxed text-cyan-100"><%= task[:actual_output] %></pre>
+    </div>
+  </div>
+
+  <div class="flex flex-wrap items-center justify-between gap-3 border-t border-gray-800 pt-4">
+    <div class="flex gap-3">
+      <% if current_step > 1 %>
+        <%= link_to '← Previous step', quest_two_step_path(current_step - 1), class: 'px-4 py-2 rounded bg-gray-800 hover:bg-gray-700 text-sm text-white transition' %>
+      <% end %>
+    </div>
+
+    <% if current_step < total_steps %>
+      <% if task[:solved] %>
+        <%= link_to 'Next →', quest_two_step_path(current_step + 1), class: 'px-4 py-2 rounded bg-cyan-700 hover:bg-cyan-600 text-sm font-semibold text-white transition' %>
+      <% else %>
+        <span class="px-4 py-2 rounded bg-gray-800 text-sm font-semibold text-gray-500 cursor-not-allowed border border-gray-700">Next →</span>
+      <% end %>
+    <% else %>
+      <span class="px-4 py-2 rounded bg-green-500/20 text-sm font-semibold text-green-300 border border-green-500/40">
+        You can run <code class="bg-gray-800 text-gray-300 px-1 py-0.5 rounded">rails quest:accept[2]</code> and unlock the third quest.
+        Except... we have not published it yet.
+      </span>
+    <% end %>
+  </div>
+</section>

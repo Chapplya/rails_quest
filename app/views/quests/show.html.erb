@@ -52,8 +52,15 @@
     <%# ── Briefing ── %>
     <div class="bg-gray-900 border border-cyan-800 rounded-lg p-6 mb-8">
       <div class="text-xs text-cyan-600 tracking-widest uppercase mb-3">// ЗАДАНИЕ //</div>
-      <pre class="whitespace-pre-wrap text-sm text-gray-200 leading-relaxed"><%= meta[:briefing] %></pre>
-      <%= render partial: "quests/briefings/#{I18n.locale}/quest_#{@quest.id}" %>
+      <% if meta[:briefing].present? %>
+        <pre class="whitespace-pre-wrap text-sm text-gray-200 leading-relaxed mb-4"><%= meta[:briefing] %></pre>
+      <% end %>
+      <%= render partial: quest_briefing_template(@quest.quest_number), locals: {
+        quest_two_tasks: @quest_two_tasks,
+        quest_two_current_task: @quest_two_current_task,
+        quest_two_current_step: @quest_two_current_step,
+        quest_two_accessible_step: @quest_two_accessible_step
+      } %>
     </div>
 
 

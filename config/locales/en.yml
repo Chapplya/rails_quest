@@ -41,6 +41,10 @@ en:
   language_switcher:
     label: "Language"
     select: "Select"
+  tests:
+    quest_2:
+      service_matches_reference: "quest 2 matches Quest2DataService reference output against the student service"
+      step_mismatch: "Step %{step} must return a string that matches the Quest2DataService reference"
   quests:
     statuses:
       locked: "LOCKED"
@@ -67,11 +71,17 @@ en:
       assignment: "// MISSION //"
       back_to_lobby: "← Back to lobby"
       restored: "✅ Module restored. Nice work, agent."
+    quest_two:
+      step_locked: "Finish the previous quest step first."
     meta:
       1:
         module_name: "db:broken"
         title: "Restore the database"
         symptom: "The operational database has collapsed — we have no information about agents, their skills, and missions"
+      2:
+        module_name: "intel:seeded"
+        title: "Seed the operational database"
+        symptom: "Reference data is empty — analysts cannot see agents, missions, or skills"
     briefings:
       1:
         intro: "Agent, welcome to AgentArchive — the central archive of the operations division. After NULL's strike the system forgot which agents exist, what skills they have, and which missions they are assigned to."
